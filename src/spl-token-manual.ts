@@ -3,7 +3,6 @@ import {
   Keypair,
   PublicKey,
   Transaction,
-  clusterApiUrl,
   SystemProgram,
   LAMPORTS_PER_SOL,
   TransactionInstruction,
@@ -26,7 +25,9 @@ const SYSVAR_RENT_PUBKEY = new PublicKey(
 );
 
 async function main() {
-  const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+    
+  const rpcUrl = process.env.RPC_URL || 'https://api.devnet.solana.com';
+  const connection = new Connection(rpcUrl, 'confirmed');
 
   const senderSecretKey = process.env.SENDER_SECRET_KEY;
   const receiverPublicKeyStr = process.env.RECEIVER_PUBLIC_KEY;
